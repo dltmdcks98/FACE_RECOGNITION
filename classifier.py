@@ -1,1 +1,17 @@
-https://hslee09.medium.com/python-cnn%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%97%B0%EC%98%88%EC%9D%B8-%EC%82%AC%EC%A7%84-%EB%B6%84%EB%A5%98-1-705aee34def4
+#이미지 처리를 위함
+import cv2
+import numpy as np
+#시각화를 위함
+from matplotlib import pyplot as plt
+
+#이미지 불러오기
+image = cv2.imread("C:/Users/dltmd\Downloads/IU_TEST/[1752705] DSC_4979.jpg")
+
+#흑백으로 전환
+grayImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+#흑백 이미지 그리기 
+plt.figure(figsize=(12,8))
+plt.imshow(grayImage, cmap='gray')
+plt.xticks([]), plt.yticks([]) #x,y측 숨김
+plt.show
