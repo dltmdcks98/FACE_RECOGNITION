@@ -1,4 +1,5 @@
 import math
+from msilib.schema import Directory
 from sklearn import neighbors
 import os
 import os.path
@@ -6,35 +7,12 @@ import pickle
 from PIL import Image, ImageDraw
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
+import shutil
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 
 def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree', verbose=False):
-    """
-    Trains a k-nearest neighbors classifier for face recognition.
-
-    :param train_dir: directory that contains a sub-directory for each known person, with its name.
-
-     (View in source code to see train_dir example tree structure)
-
-     Structure:
-        <train_dir>/
-        戍式式 <person1>/
-        弛   戍式式 <somename1>.jpeg
-        弛   戍式式 <somename2>.jpeg
-        弛   戍式式 ...
-        戍式式 <person2>/
-        弛   戍式式 <somename1>.jpeg
-        弛   戌式式 <somename2>.jpeg
-        戌式式 ...
-
-    :param model_save_path: (optional) path to save model on disk
-    :param n_neighbors: (optional) number of neighbors to weigh in classification. Chosen automatically if not specified
-    :param knn_algo: (optional) underlying data structure to support knn.default is ball_tree
-    :param verbose: verbosity of training
-    :return: returns knn classifier that was trained on the given data.
-    """
     X = []
     y = []
 
@@ -87,8 +65,8 @@ def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
     :return: a list of names and face locations for the recognized faces in the image: [(name, bounding box), ...].
         For faces of unrecognized persons, the name 'unknown' will be returned.
     """
-    if not os.path.isfile(X_img_path) or os.path.splitext(X_img_path)[1][1:] not in ALLOWED_EXTENSIONS:
-        raise Exception("Invalid image path: {}".format(X_img_path))
+    # if not os.path.isfile(X_img_path) or os.path.splitext(X_img_path)[1][1:] not in ALLOWED_EXTENSIONS:
+    #     raise Exception("Invalid image path: {}".format(X_img_path))
 
     if knn_clf is None and model_path is None:
         raise Exception("Must supply knn classifier either thourgh knn_clf or model_path")
@@ -152,12 +130,12 @@ if __name__ == "__main__":
     # STEP 1: Train the KNN classifier and save it to disk
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
-    classifier = train("knn_examples/train", model_save_path="trained_knn_model.clf", n_neighbors=2)
+    classifier = train("train", model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
     # STEP 2: Using the trained classifier, make predictions for unknown images
-    for image_file in os.listdir("knn_examples/test"):
-        full_file_path = os.path.join("knn_examples/test", image_file)
+    for image_file in os.listdir("test"):
+        full_file_path = os.path.join("test", image_file)
 
         print("Looking for faces in {}".format(image_file))
 
@@ -168,6 +146,15 @@ if __name__ == "__main__":
         # Print results on the console
         for name, (top, right, bottom, left) in predictions:
             print("- Found {} at ({}, {})".format(name, left, top))
+        
+        
 
         # Display results overlaid on an image
-        show_prediction_labels_on_image(os.path.join("knn_examples/test", image_file), predictions)
+        show_prediction_labels_on_image(os.path.join("test", image_file), predictions)
+ 
+# Directory create & move file
+        os.makedirs(dir,exist_ok=True)
+
+        shutil.move(os.path.join("test",image_file), os.path.join("train/{}".format(name),image_file))
+        print("{} is move to train/{}".format(name,name))
+    print("eof")
