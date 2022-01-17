@@ -7,7 +7,11 @@ import pickle
 from PIL import Image, ImageDraw
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
+#파일 이동을 위함
 import shutil
+#폴더 선택창을 위함
+import tkinter
+from tkinter import filedialog
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -127,15 +131,21 @@ def show_prediction_labels_on_image(img_path, predictions):
 
 
 if __name__ == "__main__":
+
+    root = tkinter.Tk()
+    root.withdraw()
+    train_dir = filedialog.askdirectory(parent=root, initialdir="/",title= "Please select a train directory")
+    test_dir = filedialog.askdirectory(parent=root, initialdir="/",title= "Please select a test directory")
+    result_dir = filedialog.askdirectory(parent=root, initialdir="/",title= "Please select a result directory")
     # STEP 1: Train the KNN classifier and save it to disk
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
-    classifier = train("train", model_save_path="trained_knn_model.clf", n_neighbors=2)
+    classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
     # STEP 2: Using the trained classifier, make predictions for unknown images
-    for image_file in os.listdir("test"):
-        full_file_path = os.path.join("test", image_file)
+    for image_file in os.listdir(test_dir):
+        full_file_path = os.path.join(test_dir, image_file)
 
         print("Looking for faces in {}".format(image_file))
 
@@ -150,11 +160,13 @@ if __name__ == "__main__":
         
 
         # Display results overlaid on an image
-        show_prediction_labels_on_image(os.path.join("test", image_file), predictions)
+        show_prediction_labels_on_image(os.path.join(test_dir, image_file), predictions)
  
 # Directory create & move file
-        os.makedirs(dir,exist_ok=True)
 
-        shutil.move(os.path.join("test",image_file), os.path.join("train/{}".format(name),image_file))
-        print("{} is move to train/{}".format(name,name))
+        
+        os.makedirs('{}/{}'.format(result_dir,name),exist_ok=True)
+
+        shutil.move(os.path.join(test_dir,image_file), os.path.join("{}/{}".format(result_dir,name),image_file))
+        print("{} is move to result/{}".format(image_file,name))
     print("eof")
