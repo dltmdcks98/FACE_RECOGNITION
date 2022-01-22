@@ -125,7 +125,7 @@ if __name__ == "__main__":
     # STEP 1: Train the KNN classifier and save it to disk
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
-    classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
+   # classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
     
@@ -147,15 +147,18 @@ if __name__ == "__main__":
             count += 1 
             if count > 1 :
                 name = "many"
-        
+    #TODO : 같은 인물이 여러명이더라도 many로 인식 함    
     
         # Display results overlaid on an image
         #show_prediction_labels_on_image(os.path.join(test_dir, image_file), predictions)
  
 # Directory create & move file
 
-        os.makedirs('{}/{}'.format(result_dir,name),exist_ok=True)
-
-        shutil.move(os.path.join(test_dir,image_file), os.path.join("{}/{}".format(result_dir,name),image_file))
-        print("{} is move to result/{}".format(image_file,name))
+        if name != "":   
+            #TODO : 이미지 인물이 아닐때 skip이 아닌 이전에 이동했던 폴더로 이동함
+            os.makedirs('{}/{}'.format(result_dir,name),exist_ok=True)
+            shutil.move(os.path.join(test_dir,image_file), os.path.join("{}/{}".format(result_dir,name),image_file))
+            print("{} is move to result/{}".format(image_file,name))
+        else :
+            print ("{} is skip ".format(image_file))
     print("eof")
