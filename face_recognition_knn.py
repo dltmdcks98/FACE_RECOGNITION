@@ -1,3 +1,4 @@
+from calendar import c
 import math
 from msilib.schema import Directory
 from sklearn import neighbors
@@ -140,6 +141,7 @@ if __name__ == "__main__":
         predictions = predict(full_file_path, model_path="trained_knn_model.clf")
 
         # Print results on the console
+        count = 0
         for name, (top, right, bottom, left) in predictions:
             print("- Found {} at ({}, {})".format(name, left, top))
             count += 1 
@@ -148,7 +150,7 @@ if __name__ == "__main__":
         
     
         # Display results overlaid on an image
-        show_prediction_labels_on_image(os.path.join(test_dir, image_file), predictions)
+        #show_prediction_labels_on_image(os.path.join(test_dir, image_file), predictions)
  
 # Directory create & move file
 
