@@ -128,7 +128,7 @@ if __name__ == "__main__":
    # classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
-    
+    name = name1 = ""
     count = 0
     # STEP 2: Using the trained classifier, make predictions for unknown images
     for image_file in os.listdir(test_dir):
@@ -142,15 +142,18 @@ if __name__ == "__main__":
 
         # Print results on the console
         count = 0
+        name1 = name 
         for name, (top, right, bottom, left) in predictions:
             print("- Found {} at ({}, {})".format(name, left, top))
             count += 1 
             if count > 1 :
-                if name != name:
+                print(count)
+                print(name1)
+                if name1 != name:
                     name = "many"
-                else :
-                    continue
-    #TODO : 같은 인물이 여러명이더라도 many로 인식 함    
+                    print(name)
+                
+                        
     
         # Display results overlaid on an image
         #show_prediction_labels_on_image(os.path.join(test_dir, image_file), predictions)
@@ -158,10 +161,11 @@ if __name__ == "__main__":
 # Directory create & move file
 
         if name != "":   
-            #TODO : 이미지 인물이 아닐때 skip이 아닌 이전에 이동했던 폴더로 이동함
+            # 이미지 인물이 아닐때 skip이 아닌 이전에 이동했던 폴더로 이동함
             os.makedirs('{}/{}'.format(result_dir,name),exist_ok=True)
             shutil.move(os.path.join(test_dir,image_file), os.path.join("{}/{}".format(result_dir,name),image_file))
             print("{} is move to result/{}".format(image_file,name))
+            name = ""
         else :
             print ("{} is skip ".format(image_file))
     print("eof")
