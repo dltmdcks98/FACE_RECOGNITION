@@ -146,7 +146,10 @@ if __name__ == "__main__":
             print("- Found {} at ({}, {})".format(name, left, top))
             count += 1 
             if count > 1 :
-                name = "many"
+                if name != name:
+                    name = "many"
+                else :
+                    continue
     #TODO : 같은 인물이 여러명이더라도 many로 인식 함    
     
         # Display results overlaid on an image
