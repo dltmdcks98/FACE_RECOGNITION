@@ -122,14 +122,13 @@ if __name__ == "__main__":
     test_dir = filedialog.askdirectory(parent=root, initialdir="/",title= "Please select a test directory")
     result_dir = filedialog.askdirectory(parent=root, initialdir="/",title= "Please select a result directory")
     
+    name = ""
     # STEP 1: Train the KNN classifier and save it to disk
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
    # classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
-    name = name1 = ""
-    count = 0
     # STEP 2: Using the trained classifier, make predictions for unknown images
     for image_file in os.listdir(test_dir):
         full_file_path = os.path.join(test_dir, image_file)
@@ -142,17 +141,17 @@ if __name__ == "__main__":
 
         # Print results on the console
         count = 0
-        name1 = name 
+        names  = []
         for name, (top, right, bottom, left) in predictions:
             print("- Found {} at ({}, {})".format(name, left, top))
-            count += 1 
+            count += 1
+            names.append(name)
+
             if count > 1 :
-                print(count)
-                print(name1)
-                if name1 != name:
+                result = list(set(names))
+                if len(result)>1:
                     name = "many"
-                    print(name)
-                
+                   
                         
     
         # Display results overlaid on an image
@@ -167,5 +166,7 @@ if __name__ == "__main__":
             print("{} is move to result/{}".format(image_file,name))
             name = ""
         else :
+            os.makedirs('{}/delete'.format(result_dir),exist_ok=True)
             print ("{} is skip ".format(image_file))
+            shutil.move(os.path.join(test_dir,image_file), os.path.join("{}/delete".format(result_dir),image_file))
     print("eof")
