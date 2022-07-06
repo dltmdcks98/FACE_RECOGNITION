@@ -5,13 +5,15 @@ from sklearn import neighbors
 import os
 import os.path
 import pickle
+# pip install pillow
 from PIL import Image, ImageDraw
+# pip3 install face_recognition
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
 
-#파일 이동을 위함
+
 import shutil
-#폴더 선택창을 위함
+
 import tkinter
 from tkinter import filedialog
 
@@ -89,7 +91,7 @@ def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
 
 
 
-#얼굴표시 
+
 def show_prediction_labels_on_image(img_path, predictions):
     pil_image = Image.open(img_path).convert("RGB")
     draw = ImageDraw.Draw(pil_image)
