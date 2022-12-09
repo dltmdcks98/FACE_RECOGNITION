@@ -1,15 +1,13 @@
-°³¹ß È¯°æ
+ê°œë°œ í™˜ê²½
 VSCode, Visual Studio 2022(C++), CMAKE, python(3.99), Git
 
-¼º°ú 
-openCV¿Í pythonÀ» ´Ù·ç°í, ±âº»ÀûÀÎ ÀÌ¹ÌÁö ±¸º°¿¡ ´ëÇÑ Áö½ÄÀ» ¾ò¾ú´Ù. 
+ì„±ê³¼ 
+openCVì™€ pythonì„ ë‹¤ë£¨ê³ , ê¸°ë³¸ì ì¸ ì´ë¯¸ì§€ êµ¬ë³„ì— ëŒ€í•œ ì§€ì‹ì„ ì–»ì—ˆë‹¤. 
 
-°³¼±Á¡  
-1. µ¥ÀÌÅÍ¸¦ ÃàÀûÇÏ°í ÇÐ½ÀÇÏ´Â ¹ýÀ» ÇÐ½ÀÇÏ¿© º¸´Ù ³ôÀº Á¤È®µµ¸¦ °®µµ·Ï ÇÑ´Ù.
+ê°œì„ ì   
+1. ë°ì´í„°ë¥¼ ì¶•ì í•˜ê³  í•™ìŠµí•˜ëŠ” ë²•ì„ í•™ìŠµí•˜ì—¬ ë³´ë‹¤ ë†’ì€ ì •í™•ë„ë¥¼ ê°–ë„ë¡ í•œë‹¤.
 => https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py 
-2. 1¹ø°ú À¯»çÇÑµ¥ ºñ½ÁÇÑ »ç¶÷À» ±¸ºÐÇÏ±â ±îÁöÀÇ µ¥ÀÌÅÍ¸¦ ÃàÀûÇÏ¿© ÀúÀåÇÒ ¼­¹ö¸¦ ±¸ÃàÇØ¾ßÇÑ´Ù.
-3. flutterÀ» È°¿ëÇÏ¿© ¾ÛÀ» °³¹ßÇÏ°í ¸¹Àº ÆÄÀÏ ¹× Æú´õ¸¦ ¼±ÅÃÇÏ¿© ÀÚµ¿À¸·Î ÀÌ¹ÌÁö¸¦ ±¸º°ÇÏ´Â ¾ÛÀ» ¸ñÇ¥·Î ÇÑ´Ù. 
-
+2. 1ë²ˆê³¼ ìœ ì‚¬í•œë° ë¹„ìŠ·í•œ ì‚¬ëžŒì„ êµ¬ë¶„í•˜ê¸° ê¹Œì§€ì˜ ë°ì´í„°ë¥¼ ì¶•ì í•˜ì—¬ ì €ìž¥í•  ì„œë²„ë¥¼ êµ¬ì¶•í•´ì•¼í•œë‹¤.
 
 
 Reference:
@@ -22,8 +20,8 @@ Reference:
 
 CNN vs KNN
 
-CNN : ¿µ»óÃ³¸® µö·¯´×¿¡¼­ »ç¿ë
-KNN : ºÐ·ù¸¦ À§ÇÑ ¾Ë°í¸®Áò 
+CNN : ì˜ìƒì²˜ë¦¬ ë”¥ëŸ¬ë‹ì—ì„œ ì‚¬ìš©
+KNN : ë¶„ë¥˜ë¥¼ ìœ„í•œ ì•Œê³ ë¦¬ì¦˜ 
 https://www.inflearn.com/questions/89475
 
 REF: https://wonwooddo.tistory.com/47
