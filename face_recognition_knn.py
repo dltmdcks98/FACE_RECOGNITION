@@ -11,9 +11,9 @@ from PIL import Image, ImageDraw
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
 
-
+#파일 이동을 위함
 import shutil
-
+#폴더 선택창을 위함
 import tkinter
 from tkinter import filedialog
 
@@ -49,11 +49,11 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
         if verbose:
             print("Chose n_neighbors automatically:", n_neighbors)
 
-    # Create and train the KNN classifier
+    # 학습된 데이터로 Classifier를 생성합니다.
     knn_clf = neighbors.KNeighborsClassifier(n_neighbors=n_neighbors, algorithm=knn_algo, weights='distance')
     knn_clf.fit(X, y)
 
-    # Save the trained KNN classifier
+    # 학습된 KNN classifier를 저장합니다.
     if model_save_path is not None:
         with open(model_save_path, 'wb') as f:
             pickle.dump(knn_clf, f)
@@ -91,7 +91,7 @@ def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
 
 
 
-
+#얼굴표시 
 def show_prediction_labels_on_image(img_path, predictions):
     pil_image = Image.open(img_path).convert("RGB")
     draw = ImageDraw.Draw(pil_image)
@@ -125,33 +125,35 @@ if __name__ == "__main__":
     result_dir = filedialog.askdirectory(parent=root, initialdir="/",title= "Please select a result directory")
     
     name = ""
-    # STEP 1: Train the KNN classifier and save it to disk
+    # STEP 1: 로컬에 저장되어있는 파일로 학습을 시작합니다.
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
    # classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
-    # STEP 2: Using the trained classifier, make predictions for unknown images
+    # STEP 2:  학습된 classifier로 확인되지 않은 이미지들을 분석합니다.
     for image_file in os.listdir(test_dir):
         full_file_path = os.path.join(test_dir, image_file)
 
         print("Looking for faces in {}".format(image_file))
 
-        # Find all people in the image using a trained classifier model
-        # Note: You can pass in either a classifier file name or a classifier model instance
+        #Classifier로 사진에서 발견된 사랍들을 분석합니다.
         predictions = predict(full_file_path, model_path="trained_knn_model.clf")
 
         # Print results on the console
         count = 0
         names  = []
         for name, (top, right, bottom, left) in predictions:
+            #발견된 사람마다 이름을 출력하고
             print("- Found {} at ({}, {})".format(name, left, top))
+            #발견된 사람의 수를 증가시킵니다.
             count += 1
             names.append(name)
 
             if count > 1 :
                 result = list(set(names))
                 if len(result)>1:
+                    # 발견된 사람이 많으면 many라는 폴더에 별도로
                     name = "many"
                    
                         
