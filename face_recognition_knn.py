@@ -1,12 +1,19 @@
+#python 3.7.9
 from calendar import c
 import math
 from msilib.schema import Directory
+
+#pip install scikit-learn
 from sklearn import neighbors
 import os
 import os.path
 import pickle
+
 # pip install pillow
 from PIL import Image, ImageDraw
+
+# pip install cmake
+# pip install dlib
 # pip3 install face_recognition
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
@@ -128,7 +135,7 @@ if __name__ == "__main__":
     # STEP 1: 로컬에 저장되어있는 파일로 학습을 시작합니다.
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
-   # classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
+    classifier = train(train_dir, model_save_path="trained_knn_model.clf", n_neighbors=2)
     print("Training complete!")
 
     # STEP 2:  학습된 classifier로 확인되지 않은 이미지들을 분석합니다.
