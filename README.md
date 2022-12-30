@@ -1,7 +1,8 @@
 개발 환경
-VSCode, Visual Studio 2022(C++), CMAKE, python(3.99), Git
+VSCode, Visual Studio 2022(C++), CMAKE, python 3.7.9, Git
 
 성과 
+
 기본적인 python을 다루는 방법을 익히고 여러 KNN알고리즘을 공부할 수 있는 계기가 되었다
 
 개선점  
