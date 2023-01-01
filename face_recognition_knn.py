@@ -11,7 +11,6 @@ import pickle
 
 # pip install pillow
 from PIL import Image, ImageDraw
-
 # pip install cmake
 # pip install dlib
 # pip3 install face_recognition
